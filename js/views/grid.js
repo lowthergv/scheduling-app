@@ -11,6 +11,10 @@ export function renderGrid(container, { onSwitchSession, onChangeDate, onCellCli
     const isToday = ui.currentDate === todayStr();
     const lastSaved = getLastSavedAt();
 
+    const prevMain = container.querySelector('.main-content');
+    const savedMainScroll = prevMain ? prevMain.scrollTop : 0;
+    const savedWindowScroll = window.scrollY;
+
     container.innerHTML = `
         <header class="app-header">
             <div class="header-logo">Pacific<span>Clinics</span></div>
@@ -102,6 +106,11 @@ export function renderGrid(container, { onSwitchSession, onChangeDate, onCellCli
         </div>
         ` : ''}
     `;
+
+    // Restore scroll position after re-render
+    const newMain = container.querySelector('.main-content');
+    if (newMain && savedMainScroll) newMain.scrollTop = savedMainScroll;
+    if (savedWindowScroll) window.scrollTo(0, savedWindowScroll);
 
     // Event wiring
     container.querySelector('.session-tabs').addEventListener('click', e => {
