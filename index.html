@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pacific Clinics — Scheduler</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#F6F8FA" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+<body>
+    <div id="app">
+        <!-- Rendered by app.js -->
+    </div>
+
+    <!-- PIN Modal (shared) -->
+    <div id="pin-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pin-modal-title">
+        <div class="modal-box">
+            <h3 id="pin-modal-title">Admin PIN</h3>
+            <p id="pin-modal-desc">Enter your PIN to access edit mode.</p>
+            <div class="pin-display" id="pin-dots" aria-hidden="true"></div>
+            <div class="pin-pad" id="pin-pad" aria-label="PIN keypad"></div>
+            <div class="modal-error" id="pin-error" role="alert"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="pin-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit cell popover (shared, positioned by JS) -->
+    <div id="edit-popover" class="edit-popover hidden" role="dialog" aria-label="Assign room"></div>
+
+    <!-- Settings panel -->
+    <div id="settings-overlay" class="settings-overlay" role="dialog" aria-modal="true" aria-label="Settings">
+        <div class="settings-panel" id="settings-panel"></div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

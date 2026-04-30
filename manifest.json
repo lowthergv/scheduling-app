@@ -1,0 +1,16 @@
+{
+    "name": "Pacific Clinics Scheduler",
+    "short_name": "PC Scheduler",
+    "description": "Schedule management for Pacific Clinics",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#0D1117",
+    "theme_color": "#1D4ED8",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='24' fill='%231D4ED8'/%3E%3Crect x='32' y='56' width='128' height='104' rx='8' fill='none' stroke='white' stroke-width='8'/%3E%3Cline x1='32' y1='88' x2='160' y2='88' stroke='white' stroke-width='8'/%3E%3Cline x1='64' y1='40' x2='64' y2='72' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3Cline x1='128' y1='40' x2='128' y2='72' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        }
+    ]
+}
