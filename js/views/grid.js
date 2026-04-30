@@ -435,7 +435,7 @@ function showStaffInlineInput(anchor, groupId) {
                 selectedStaffId = item.dataset.staffId;
                 input.value = item.dataset.staffName;
                 acList.classList.add('hidden');
-                input.focus();
+                confirmFn();
             });
         });
     }
