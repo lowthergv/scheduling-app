@@ -18,6 +18,8 @@ export function renderGrid(container, { onSwitchSession, onChangeDate, onCellCli
     const savedWindowScroll = window.scrollY;
     const savedDocScroll = document.documentElement.scrollTop || document.body.scrollTop;
 
+    console.log('[renderGrid] Saved scroll:', { savedMainScroll, savedGridWrapScroll, savedWindowScroll, savedDocScroll });
+
     container.innerHTML = `
         <header class="app-header">
             <div class="header-logo">Pacific<span>Clinics</span></div>
@@ -115,15 +117,25 @@ export function renderGrid(container, { onSwitchSession, onChangeDate, onCellCli
         const newMain = container.querySelector('.main-content');
         const newGridWrap = container.querySelector('.grid-wrap');
 
-        if (newMain && savedMainScroll > 0) newMain.scrollTop = savedMainScroll;
-        if (newGridWrap && savedGridWrapScroll > 0) newGridWrap.scrollTop = savedGridWrapScroll;
+        console.log('[renderGrid] Restoring scroll:', { newMain: !!newMain, newGridWrap: !!newGridWrap, savedMainScroll, savedGridWrapScroll, savedWindowScroll, savedDocScroll });
+
+        if (newMain && savedMainScroll > 0) {
+            newMain.scrollTop = savedMainScroll;
+            console.log('[renderGrid] Set .main-content.scrollTop to', savedMainScroll);
+        }
+        if (newGridWrap && savedGridWrapScroll > 0) {
+            newGridWrap.scrollTop = savedGridWrapScroll;
+            console.log('[renderGrid] Set .grid-wrap.scrollTop to', savedGridWrapScroll);
+        }
 
         if (savedWindowScroll > 0) {
             window.scrollTo(0, savedWindowScroll);
+            console.log('[renderGrid] Called window.scrollTo(0,' + savedWindowScroll + ')');
         }
         if (savedDocScroll > 0) {
             document.documentElement.scrollTop = savedDocScroll;
             document.body.scrollTop = savedDocScroll;
+            console.log('[renderGrid] Set document scroll to', savedDocScroll);
         }
     });
 
