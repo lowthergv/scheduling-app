@@ -12,8 +12,11 @@ export function renderGrid(container, { onSwitchSession, onChangeDate, onCellCli
     const lastSaved = getLastSavedAt();
 
     const prevMain = container.querySelector('.main-content');
+    const prevGridWrap = container.querySelector('.grid-wrap');
     const savedMainScroll = prevMain ? prevMain.scrollTop : 0;
+    const savedGridWrapScroll = prevGridWrap ? prevGridWrap.scrollTop : 0;
     const savedWindowScroll = window.scrollY;
+    const savedDocScroll = document.documentElement.scrollTop || document.body.scrollTop;
 
     container.innerHTML = `
         <header class="app-header">
@@ -107,10 +110,22 @@ export function renderGrid(container, { onSwitchSession, onChangeDate, onCellCli
         ` : ''}
     `;
 
-    // Restore scroll position after re-render
-    const newMain = container.querySelector('.main-content');
-    if (newMain && savedMainScroll) newMain.scrollTop = savedMainScroll;
-    if (savedWindowScroll) window.scrollTo(0, savedWindowScroll);
+    // Restore scroll position after re-render with rAF to ensure layout is complete
+    requestAnimationFrame(() => {
+        const newMain = container.querySelector('.main-content');
+        const newGridWrap = container.querySelector('.grid-wrap');
+
+        if (newMain && savedMainScroll > 0) newMain.scrollTop = savedMainScroll;
+        if (newGridWrap && savedGridWrapScroll > 0) newGridWrap.scrollTop = savedGridWrapScroll;
+
+        if (savedWindowScroll > 0) {
+            window.scrollTo(0, savedWindowScroll);
+        }
+        if (savedDocScroll > 0) {
+            document.documentElement.scrollTop = savedDocScroll;
+            document.body.scrollTop = savedDocScroll;
+        }
+    });
 
     // Event wiring
     container.querySelector('.session-tabs').addEventListener('click', e => {
