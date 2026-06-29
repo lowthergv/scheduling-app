@@ -1,4 +1,4 @@
-# Pacific Clinics Scheduler — Backend Architecture Plan
+# Northstar ABA Scheduler — Backend Architecture Plan
 
 Status: **draft for review** · Target: multi-user shared schedule, self-hosted on a Raspberry Pi at the clinic, accessible from the public internet, with real-time sync.
 

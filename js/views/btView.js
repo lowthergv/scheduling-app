@@ -29,7 +29,7 @@ export function renderBTView(container, { onSwitchSession, onChangeDate, onSwitc
 
     container.innerHTML = `
         <header class="app-header">
-            <div class="header-logo">Pacific<span>Clinics</span></div>
+            <div class="header-logo">Northstar<span>ABA</span></div>
             <div class="session-tabs">
                 ${['AM','MD','PM'].map(s => {
                     const hasGroup = !!getBTGroupForSession(state, ui.staffId, s, dow);
@@ -395,5 +395,5 @@ function toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme') || 'dark';
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('pacific_clinics_theme', next);
+    localStorage.setItem('scheduler_theme', next);
 }

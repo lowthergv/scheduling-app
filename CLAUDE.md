@@ -36,8 +36,8 @@ Views are fully replaced on each route. No virtual DOM or diffing.
 ## State Shape
 
 Two localStorage keys:
-- `pacific_clinics_state` — persisted data (groups, staff, assignments, overrides, settings)
-- `pacific_clinics_ui` — ephemeral UI state (role, currentDate, currentSession, flags)
+- `scheduler_state` — persisted data (groups, staff, assignments, overrides, settings)
+- `scheduler_ui` — ephemeral UI state (role, currentDate, currentSession, flags)
 
 `setState(partial)` merges shallowly into state and debounces saves (300ms). Use `setStateSilent(partial)` for UI-only changes that shouldn't trigger a full re-render (e.g., settings panel edits mid-flight).
 

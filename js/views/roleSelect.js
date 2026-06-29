@@ -36,7 +36,7 @@ export function renderRoleSelect(container, { onRoleChosen }) {
         <div class="rs-wrap">
             <div class="rs-card">
                 <div class="rs-header">
-                    <div class="rs-logo">Pacific<span>Clinics</span></div>
+                    <div class="rs-logo">Northstar<span>ABA</span></div>
                     <h1 class="rs-greeting">${escapeHtml(getGreeting())}</h1>
                     <p class="rs-tagline">Who are you today?</p>
                 </div>

@@ -282,7 +282,7 @@ function openPINModal({ title, desc, onSuccess, onCancel, isSetup = false }) {
 
 // ===== Theme =====
 function initTheme() {
-    const saved = localStorage.getItem('pacific_clinics_theme');
+    const saved = localStorage.getItem('scheduler_theme');
     const preferred = window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', saved || preferred);
 }

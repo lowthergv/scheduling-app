@@ -1,8 +1,8 @@
 import { todayStr, getCurrentSession, generateId } from './utils.js';
 import { buildDemoState } from './seed.js';
 
-const STATE_KEY = 'pacific_clinics_state';
-const UI_KEY = 'pacific_clinics_ui';
+const STATE_KEY = 'scheduler_state';
+const UI_KEY = 'scheduler_ui';
 
 const DEFAULT_STATE = {
     settings: {

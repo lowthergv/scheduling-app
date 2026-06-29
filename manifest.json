@@ -1,7 +1,7 @@
 {
-    "name": "Pacific Clinics Scheduler",
+    "name": "Northstar ABA Scheduler",
     "short_name": "PC Scheduler",
-    "description": "Schedule management for Pacific Clinics",
+    "description": "Schedule management for Northstar ABA",
     "start_url": "./",
     "display": "standalone",
     "background_color": "#0D1117",
