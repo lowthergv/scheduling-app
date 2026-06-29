@@ -1,4 +1,5 @@
 import { todayStr, getCurrentSession, generateId } from './utils.js';
+import { buildDemoState } from './seed.js';
 
 const STATE_KEY = 'pacific_clinics_state';
 const UI_KEY = 'pacific_clinics_ui';
@@ -40,7 +41,8 @@ export function getLastSavedAt() { return _lastSavedAt; }
 export function loadAll() {
     try {
         const raw = localStorage.getItem(STATE_KEY);
-        _state = raw ? { ...DEFAULT_STATE, ...JSON.parse(raw) } : JSON.parse(JSON.stringify(DEFAULT_STATE));
+        // Fresh visitor (no saved schedule) → boot into the populated demo.
+        _state = raw ? { ...DEFAULT_STATE, ...JSON.parse(raw) } : buildDemoState();
         // Deep-merge settings so new defaults aren't wiped by old saves
         _state.settings = { ...DEFAULT_STATE.settings, ..._state.settings };
         _state.settings.sessions = { ...DEFAULT_STATE.settings.sessions, ..._state.settings.sessions };
