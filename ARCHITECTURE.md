@@ -1,6 +1,21 @@
 # Northstar ABA Scheduler — Backend Architecture Plan
 
-Status: **draft for review** · Target: multi-user shared schedule, self-hosted on a Raspberry Pi at the clinic, accessible from the public internet, with real-time sync.
+Status: **Phase 1 complete** · Target: multi-user shared schedule, self-hosted on a Raspberry Pi at the clinic, accessible from the public internet, with real-time sync.
+
+---
+
+## Implementation Status
+
+**✓ Phase 1 complete:**
+- Express.js app scaffolding, static frontend serving
+- SQLite setup with WAL mode, foreign keys enabled
+- Full schema (11 tables) with idempotent migrations
+- Health check endpoint (`GET /health`)
+- Docker + docker-compose for portable deployment
+- npm scripts: `npm start`, `npm run dev`
+- Tested on macOS (Apple Silicon); ready for Pi 4/5
+
+**Next**: Phase 2 (Auth layer) — login, sessions, rate limiting.
 
 ---
 
@@ -255,7 +270,17 @@ Everything downstream (views, auto-assign UI, etc.) keeps working unchanged beca
 
 ## 7. Deployment plan
 
-### One-time setup on the Pi
+### MacBook prototype (current)
+
+For same-WiFi access during staff testing:
+```bash
+npm install
+npm start  # listens on 0.0.0.0:3000, accessible via MacBook's LAN IP
+```
+
+Staff connect via `http://<your-mac-ip>:3000`. The SQLite file lives in `./data/schedule.db`. To back up before testing, copy `data/` to another location.
+
+### One-time setup on the Pi (eventual)
 1. Install: `nodejs` (LTS), `sqlite3`, `caddy`.
 2. Clone repo to `/opt/scheduler`, `npm ci --production`.
 3. Create `/opt/scheduler/data/` for the SQLite file. `chmod 700`.
@@ -303,7 +328,8 @@ If any of this feels heavier than the value warrants, Tailscale + LAN-only is a 
 
 A suggested order of work (each phase is shippable on its own):
 
-1. **Backend skeleton** — Express app, SQLite init, schema migration script, health check route. No auth yet. Run locally.
+1. **✓ Backend skeleton** — Express app, SQLite init, schema migration script, health check route. No auth yet. Run locally.
+   - *Completed*. All tables defined and migrated on startup. Server serves frontend at localhost:3000. Tested.
 2. **Auth layer** — `users`, `sessions` tables; login / logout / me / change-password endpoints; session cookie middleware; rate limit.
 3. **Read API** — `GET /state` returning the full snapshot from DB. Seed script populates a sample dataset.
 4. **Frontend bootstrap swap** — replace localStorage hydration in `state.js` with `fetch('/api/state')`. Add login screen. Confirm the existing UI works against the live backend (no mutations yet).

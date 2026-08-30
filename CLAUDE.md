@@ -4,19 +4,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Running the App
 
-No build step required — this is a static vanilla JS app. Serve from the project root:
+The app now has a Node.js backend. To run locally:
 
 ```bash
-npx serve .
+npm install
+npm start         # node server/index.js (listens on :3000)
 # or
-python3 -m http.server 8080
+npm run dev       # auto-reload on file changes
 ```
 
-Open `http://localhost:8080` (or whatever port). ES modules require an HTTP server; opening `index.html` directly as `file://` will fail.
+Open `http://localhost:3000`. The backend:
+- Serves the static frontend (index.html, js/, styles.css)
+- Runs the schema migration on startup (server/migrate.js)
+- Provides `/health` and future API endpoints under `/api`
 
-## Architecture
+For Docker (when deploying):
+```bash
+docker-compose up --build
+```
 
-**Stack**: Vanilla JS ES modules, no framework, no bundler, localStorage persistence, PWA (manifest.json).
+Data (SQLite file) is mounted at `./data` so it persists across container restarts.
+
+## Backend
+
+**Tech**: Node.js + Express, SQLite (better-sqlite3), WebSockets (ws), bcryptjs auth.
+
+**Directory**: `server/`
+- `index.js` — Express app entry point
+- `db.js` — SQLite connection singleton (WAL mode, foreign keys on)
+- `schema.sql` — all table definitions
+- `migrate.js` — runs schema on startup
+- `routes/` — future API endpoints (phases 2+)
+
+**Migration plan**: When moving to the Pi, copy `./data/schedule.db` over and restart. All schedule data comes with it.
+
+## Frontend Architecture
+
+**Stack**: Vanilla JS ES modules, no framework, no bundler, PWA (manifest.json).
 
 **Module roles:**
 - `js/state.js` — reactive global state with subscriber pattern; auto-saves to localStorage
